@@ -18,7 +18,7 @@ export class LoanAdministrationComponent implements OnInit {
     @Inject('BASE_URL') private baseUrl: string
   ) {
     http.get<Customer[]>(baseUrl + 'api/customers').subscribe(
-      res => { this.customers = res; console.log('TESTING', 'CUSTOMERS', this.customers); },
+      res => { this.customers = res; },
       err => { console.log('ERROR FETCHING CUSTOMERS', err); }
     );
   }

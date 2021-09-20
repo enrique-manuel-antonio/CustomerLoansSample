@@ -32,7 +32,6 @@ export class CustomerRegistrationComponent implements OnInit {
     let test = this.route.params.subscribe(
       params => {
         customerId = +params['id'];
-        console.log('TESTING', 'FETCH DATA FOR CUSTOMER WITH ID: ', customerId);
         if (customerId) {
           this.editId = customerId;
           this.http.get<Customer>(this.baseUrl + 'api/customers/' + customerId).subscribe(

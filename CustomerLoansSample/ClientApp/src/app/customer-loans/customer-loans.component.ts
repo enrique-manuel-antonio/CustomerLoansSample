@@ -32,7 +32,6 @@ export class CustomerLoansComponent implements OnInit, OnChanges {
   }
 
   loadData() {
-    console.log('TESTING', 'CUSTOMER ID', this.customerId);
     this.newLoanForm = this.formBuilder.group({
       id: 0,
       customerId: parseInt(this.customerId),
@@ -52,7 +51,6 @@ export class CustomerLoansComponent implements OnInit, OnChanges {
   }
 
   onSubmit(newLoanData) {
-    console.log('TESTING', 'LOAN DATA', newLoanData);
     this.http.post<Loan>(this.baseUrl + 'api/loans', newLoanData).subscribe(
       res => {
         console.log('SUCCESS', res);
@@ -64,7 +62,6 @@ export class CustomerLoansComponent implements OnInit, OnChanges {
   }
 
   onToggleEditing(loan: Loan) {
-    console.log('TESTING', 'LOAN TO EDIT', loan);
     if (loan.id != this.editingLoanId){
       this.editingLoanId = loan.id;
       this.editingLoanDate = moment(loan.dateRequested).format('YYYY-MM-DD');
