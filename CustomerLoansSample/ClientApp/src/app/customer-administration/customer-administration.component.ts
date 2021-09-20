@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Customer } from 'src/models/customer';
 
 @Component({
@@ -12,6 +13,7 @@ export class CustomerAdministrationComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
     @Inject('BASE_URL') private baseUrl: string
   ) {
     http.get<Customer[]>(baseUrl + 'api/customers').subscribe(
@@ -34,7 +36,7 @@ export class CustomerAdministrationComponent implements OnInit {
   }
 
   onEdit(customerId) {
-    
+    this.router.navigate(['/customer-modification/' + customerId]);
   }
 
 }

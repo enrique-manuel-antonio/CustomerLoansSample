@@ -18,7 +18,8 @@ namespace CustomerLoansSample.Data
 
             modelBuilder.Entity<Loan>()
                 .HasOne(l => l.Customer)
-                .WithMany(c => c.Loans);
+                .WithMany(c => c.Loans)
+                .HasForeignKey(f => f.CustomerId);
         }
 
         public DbSet<Customer> Customer { get; set; }
