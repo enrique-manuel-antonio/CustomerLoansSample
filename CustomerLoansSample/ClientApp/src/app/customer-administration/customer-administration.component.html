@@ -1,0 +1,24 @@
+<table class="table table-striped" *ngIf="customers && customers.length > 0">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers; index as i">
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.dateOfBirth | date:"yyyy-MM-dd" }}</td>
+            <td>
+                <a href="javascript:void(0)" (click)="onDelete(customer.id, i)" >Delete</a>
+                |
+                <a href="customer-modification/{{customer.id}}">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,48 @@
+<form [formGroup]="newLoanForm" (ngSubmit)="onSubmit(newLoanForm.value)">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="dateRequested">Date Requested</label>
+            <input type="date" class="form-control" id="dateRequested" formControlName="dateRequested" required />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" formControlName="amount" required />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="newLoanForm.status === 'INVALID'">Submit New Loan</button>
+</form>
+
+<table class="table table-striped" *ngIf="loans && loans.length > 0">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date Requested</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let loan of loans; index as i">
+            <td>{{ loan.id }}</td>
+            <div *ngIf="editingLoanId == loan.id; then editMode; else displayMode"></div>
+            <ng-template #displayMode>
+                <td>{{ loan.dateRequested | date:"yyyy-MM-dd" }}</td>
+                <td>{{ loan.amount }}</td>
+                <td>
+                    <a href="javascript:void(0)" (click)="onToggleEditing(loan)">Edit</a>
+                    |
+                    <a href="javascript:void(0)" (click)="onDelete(loan.id, i)">Delete</a>                
+                </td>
+            </ng-template>
+            <ng-template #editMode>
+                <td><input type="date" [(ngModel)]="editingLoanDate" /></td>
+                <td><input type="number" [(ngModel)]="editingLoanAmount" /></td>
+                <td *ngIf="editingLoanId == loan.id; else editionActions">
+                    <a href="javascript:void(0)" (click)="onEdit(i)">Submit</a>
+                    |
+                    <a href="javascript:void(0)" (click)="onToggleEditing(loan)">Cancel</a>
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
